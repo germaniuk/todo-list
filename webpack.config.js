@@ -1,23 +1,23 @@
 var path = require('path');
 var webpack = require('webpack');
-var UglifyJSPlugin = require('uglifyjs-webpack-plugin'); 
+var UglifyJSPlugin = require('uglifyjs-webpack-plugin'); // плагин минимизации
 module.exports = {
     entry: {
         'polyfills': './src/polyfills.ts',
         'app': './src/main.ts'
       },
    output:{
-       path: path.resolve(__dirname, './public'),     
+       path: path.resolve(__dirname, './public'),     // путь к каталогу выходных файлов - папка public
        publicPath: '/public/',
-       filename: "[name].js"       
+       filename: "[name].js"       // название создаваемого файла
    },
    resolve: {
     extensions: ['.ts', '.js']
   },
    module:{
-       rules:[   
+       rules:[   //загрузчик для ts
            {
-               test: /\.ts$/, 
+               test: /\.ts$/, // определяем тип файлов
                use: [
                 {
                     loader: 'awesome-typescript-loader',
@@ -25,14 +25,21 @@ module.exports = {
                   } ,
                    'angular2-template-loader'
                ]
-            }
+            },{
+              test: /\.html$/,
+              loader: 'html-loader'
+            }, {
+                test: /\.css$/,
+                include: path.resolve(__dirname,'src/app'),
+                loader: 'raw-loader'
+              }
        ]
    },
    plugins: [
     new webpack.ContextReplacementPlugin(
         /angular(\\|\/)core/,
-        path.resolve(__dirname, 'src'), 
-      {} 
+        path.resolve(__dirname, 'src'), // каталог с исходными файлами
+      {} // карта маршрутов
     ),
     new webpack.optimize.CommonsChunkPlugin({
         name: ['app', 'polyfills']
