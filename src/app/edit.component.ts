@@ -16,11 +16,10 @@ export class EditComponent {
     }
 
 
-    private i: number;
     task : Task;
 
     ngOnInit(){
-        this.activateRoute.params.subscribe(params => this.i = +params['i']);
-        this.task = this.taskService.data[this.i];
+        this.activateRoute.params.subscribe(params => {const i = +params['i'];
+        this.task = this.taskService.data[i]});
     }
 }

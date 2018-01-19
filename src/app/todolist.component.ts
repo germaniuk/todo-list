@@ -4,8 +4,7 @@ import { TaskService } from './task.service';
 
 @Component({
     selector: 'todolist-component',
-    templateUrl: './template.component.html',
-    providers: [TaskService]
+    templateUrl: './template.component.html'
 })
 export class TodolistComponent { 
     tasks:  Task[];

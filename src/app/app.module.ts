@@ -8,7 +8,7 @@ import {Routes, RouterModule} from '@angular/router';
 import { TaskService } from './task.service';
 
 const appRoutes: Routes =[
-    { path: 'home', component: AppComponent},
+    { path: '', component: TodolistComponent},
     { path: 'task/:i', component: EditComponent}
 ];
 
