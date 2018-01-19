@@ -1,23 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Task } from './task';
+import { TaskService } from './task.service';
 
 @Component({
     selector: 'todolist-component',
-    templateUrl: './template.component.html'
+    templateUrl: './template.component.html',
+    providers: [TaskService]
 })
 export class TodolistComponent { 
-    tasks: Task[] = 
-    [
-        { description: "Найти роботу", done: false},
-        { description: "Сделать todo-list", done: true}
-    ];
-    addTask(text: string): void {
-         
-        if(text==null || text==undefined || text.trim()=="")
-            return;
-        this.tasks.push(new Task(text));
+    tasks:  Task[];
+    
+    constructor(private taskService: TaskService){
+
     }
+
+    ngOnInit(){
+        this.tasks = this.taskService.data;
+    }
+
+    addTask(text: string): void{
+        this.taskService.addData(text);
+    }
+
     deleteTask(index: any) {
-        this.tasks.splice(index, 1);
-      }
+        this.taskService.deleteData(index);
+    }
 }

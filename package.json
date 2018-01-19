@@ -8,6 +8,7 @@
         "build": "webpack"
     },
     "dependencies": {
+        "@angular/router": "~5.0.0",
         "@angular/common": "~5.0.0",
         "@angular/compiler": "~5.0.0",
         "@angular/core": "~5.0.0",
